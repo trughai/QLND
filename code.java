@@ -100,14 +100,23 @@ public class PersonalTaskManagerViolations {
         JSONArray tasks = loadTasksFromDb();
 
         // Kiểm tra trùng lặp
-        for (Object obj : tasks) {
-            JSONObject existingTask = (JSONObject) obj;
-            if (existingTask.get("title").toString().equalsIgnoreCase(title) &&
-                existingTask.get("due_date").toString().equals(dueDate.format(DATE_FORMATTER))) {
-                System.out.println(String.format("Lỗi: Nhiệm vụ '%s' đã tồn tại với cùng ngày đến hạn.", title));
-                return null;
+        private boolean isDuplicateTask(JSONArray tasks, String title, String dueDateStr) {
+            for (Object obj : tasks) {
+                JSONObject task = (JSONObject) obj;
+                if (task.get("title").toString().equalsIgnoreCase(title) &&
+                    task.get("due_date").toString().equals(dueDateStr)) {
+                    return true;
+                }
             }
+            return false;
         }
+
+        // Sử dụng:
+        if (isDuplicateTask(tasks, title, dueDate.format(DATE_FORMATTER))) {
+            System.out.println("Lỗi: Nhiệm vụ đã tồn tại...");
+            return null;
+        }
+
 
         String taskId = UUID.randomUUID().toString(); // YAGNI: Có thể dùng số nguyên tăng dần đơn giản hơn.
 
