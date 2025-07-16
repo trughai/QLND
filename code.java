@@ -86,18 +86,15 @@ public class PersonalTaskManagerViolations {
             return null;
         }
 
-        String[] validPriorities = {"Thấp", "Trung bình", "Cao"};
-        boolean isValidPriority = false;
-        for (String validP : validPriorities) {
-            if (validP.equals(priorityLevel)) {
-                isValidPriority = true;
-                break;
-            }
+        private boolean isValidPriority(String priority) {
+            return Arrays.asList("Thấp", "Trung bình", "Cao").contains(priority);
         }
-        if (!isValidPriority) {
-            System.out.println("Lỗi: Mức độ ưu tiên không hợp lệ. Vui lòng chọn từ: Thấp, Trung bình, Cao.");
+        // Sử dụng:
+        if (!isValidPriority(priorityLevel)) {
+            System.out.println("Lỗi: Mức độ ưu tiên không hợp lệ.");
             return null;
         }
+
 
         // Tải dữ liệu
         JSONArray tasks = loadTasksFromDb();
