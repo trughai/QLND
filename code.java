@@ -1,3 +1,4 @@
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 
 public class PersonalTaskManagerViolations {
 
@@ -56,9 +58,15 @@ public class PersonalTaskManagerViolations {
                                                 String dueDateStr, String priorityLevel,
                                                 boolean isRecurring) {
 
-        if (title == null || title.trim().isEmpty()) {
+        private boolean isValidTitle(String title) {
+            return title != null && !title.trim().isEmpty();
+        }
+        // Sử dụng:
+        if (!isValidTitle(title)) {
             System.out.println("Lỗi: Tiêu đề không được để trống.");
             return null;
+        }
+
         }
         if (dueDateStr == null || dueDateStr.trim().isEmpty()) {
             System.out.println("Lỗi: Ngày đến hạn không được để trống.");
