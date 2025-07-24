@@ -114,7 +114,7 @@ System.out.println("Lỗi: Ngày đến hạn không hợp lệ. Vui lòng sử 
             return null;
         }
 
-        String taskId = UUID.randomUUID().toString(); // YAGNI: Có thể dùng số nguyên tăng dần đơn giản hơn.
+        String taskId = String.valueOf(tasks.size() + 1); // YAGNI: Có thể dùng số nguyên tăng dần đơn giản hơn.
 
         JSONObject newTask = new JSONObject();
         newTask.put("id", taskId);
