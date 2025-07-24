@@ -130,12 +130,6 @@ System.out.println("Lỗi: Ngày đến hạn không hợp lệ. Vui lòng sử 
 // Sử dụng:
     newTask.put("created_at", getCurrentTimestamp());
     newTask.put("last_updated_at", getCurrentTimestamp());
-        newTask.put("is_recurring", isRecurring); // YAGNI: Thêm thuộc tính này dù chưa có chức năng xử lý nhiệm vụ lặp lại
-        if (isRecurring) {
-
-            newTask.put("recurrence_pattern", "Chưa xác định");
-        }
-
         tasks.add(newTask);
 
         // Lưu dữ liệu
