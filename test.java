@@ -68,10 +68,19 @@ public class PersonalTaskManagerViolations {
             System.out.println("Lỗi: Ngày đến hạn không được để trống.");
             return null;
         }
-        LocalDate dueDate;
-        try {
-            dueDate = LocalDate.parse(dueDateStr, DATE_FORMATTER);
-        } catch (DateTimeParseException e) {
+        private LocalDate parseDueDate(String dueDateStr) {
+            try {
+                return LocalDate.parse(dueDateStr, DATE_FORMATTER);
+            } catch (DateTimeParseException e) {
+              return null;
+            }
+        }
+// Sử dụng:
+        LocalDate dueDate = parseDueDate(dueDateStr);
+        if (dueDate == null) {
+            System.out.println("Lỗi: Ngày đến hạn không hợp lệ.");
+            return null;
+        }
 System.out.println("Lỗi: Ngày đến hạn không hợp lệ. Vui lòng sử dụng định dạng YYYY-MM-DD.");
             return null;
         }
